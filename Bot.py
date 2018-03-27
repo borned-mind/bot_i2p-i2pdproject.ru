@@ -8,6 +8,8 @@ from pathlib import Path
 import validators
 import re
 
+help_str="ping\nget_list\nadd"
+
 class Bot:
 	def execute_sql(self,what, *args):
 		self.sql_cursor.execute(what % args)
@@ -36,7 +38,10 @@ class Bot:
 				except Exception as exp:
 					self.send_msg(username, str(exp) )
 				print self.list_servs
+		elif comm == "help":
+			self.send_msg(username,help_str)
 		else:
+			self.send_msg(username, "unregistered msg\n"+help_str)
 			print "Uregistered command of "+str(username)+" -> " + comm
 
 	def init_sql(self, sql_name='servers.sql'):
